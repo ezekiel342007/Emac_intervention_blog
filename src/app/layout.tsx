@@ -35,39 +35,41 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased m-10`}
       >
-        <div className="flex justify-center mb-5">
-          <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuLink>Home</NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>Filter</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[250px] gap-4">
-                    <li>
-                      <NavigationMenuLink>Latest</NavigationMenuLink>
-                      <NavigationMenuLink>Trending</NavigationMenuLink>
-                      <NavigationMenuLink>Unread</NavigationMenuLink>
-                      <NavigationMenuLink>Read</NavigationMenuLink>
-                    </li>
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink>Tech</NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink>Career</NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink>All Categories</NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink>You</NavigationMenuLink>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+        <div className="mb-36">
+          <div className="flex justify-center fixed bg-white h-fit top-0 p-5 w-[100vw] z-50">
+            <NavigationMenu className="mt-5">
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuLink href="/">Home</NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger>Filter</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[250px] gap-4">
+                      <li>
+                        <NavigationMenuLink>Latest</NavigationMenuLink>
+                        <NavigationMenuLink>Trending</NavigationMenuLink>
+                        <NavigationMenuLink>Unread</NavigationMenuLink>
+                        <NavigationMenuLink>Read</NavigationMenuLink>
+                      </li>
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink>Tech</NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink>Career</NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink>All Categories</NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink>You</NavigationMenuLink>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
         </div>
         {children}
       </body>
