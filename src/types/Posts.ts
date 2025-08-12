@@ -28,3 +28,10 @@ export interface Post {
   postedOn: Date;
   updatedOn: Date;
 }
+
+export interface PostResponse {
+  results: Post[];
+  next: string;
+  previous: string;
+  count: number;
+}

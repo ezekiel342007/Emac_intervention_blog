@@ -43,17 +43,7 @@ export default function RootLayout({
                   <NavigationMenuLink href="/">Home</NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Filter</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[250px] gap-4">
-                      <li>
-                        <NavigationMenuLink>Latest</NavigationMenuLink>
-                        <NavigationMenuLink>Trending</NavigationMenuLink>
-                        <NavigationMenuLink>Unread</NavigationMenuLink>
-                        <NavigationMenuLink>Read</NavigationMenuLink>
-                      </li>
-                    </ul>
-                  </NavigationMenuContent>
+                  <NavigationMenuLink href="blogs/">Blogs</NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuLink>Tech</NavigationMenuLink>

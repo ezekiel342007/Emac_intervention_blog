@@ -20,7 +20,7 @@ export default async function Home(): Promise<JSX.Element> {
       <BackgroundCarousel />
       <div className="grid grid-cols-3 w-full">
         {
-          mostTrendingPosts.map((post: Post) => {
+          mostTrendingPosts.map((post: Post): JSX.Element => {
             return <BlogCard key={post.id} postDetail={post} />
           })
         }
