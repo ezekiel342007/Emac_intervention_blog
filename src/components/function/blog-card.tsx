@@ -12,7 +12,6 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({ postDetail }: BlogCardProps) {
-  console.log(postDetail.image_url);
 
   return (
     <Link className="w-fit mb-2" href={`blogs/${postDetail.id}`}>

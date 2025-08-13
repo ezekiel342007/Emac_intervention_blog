@@ -4,7 +4,7 @@ import { Post } from "@/types/Posts";
 import { JSX } from "react";
 
 export default async function Page(): Promise<JSX.Element> {
-  const url = process.env.ALL_POSTS_ENDPOINT;
+  const url = process.env.PAGINATED_ALL_POSTS_ENDPOINT;
 
   return (
     <div className="m-12">

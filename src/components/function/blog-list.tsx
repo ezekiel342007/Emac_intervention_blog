@@ -22,6 +22,8 @@ export default function BlogList({ fetchUrl }: BlogListProps): JSX.Element {
   const [url, setUrl] = useState(fetchUrl);
   const [posts, setPosts] = useState<PostResponse | null>(null);
   const [loading, setLoading] = useState(true);
+  const postEndpoint = process.env.NEXT_PUBLIC_ALL_POSTS_ENDPOINT;
+  const postLimit = process.env.NEXT_PUBLIC_POSTS_LIMIT;
 
   useEffect(() => {
     setLoading(true);
@@ -29,7 +31,12 @@ export default function BlogList({ fetchUrl }: BlogListProps): JSX.Element {
       .then((data) => setPosts(data))
       .finally(() => setLoading(false));
   }, [url]);
+
+  console.log(url);
+  const totalPages = posts?.results.length ? Math.ceil((posts.count ?? 0) / posts.results.length) : 0;
   if (loading || !posts) return <p>loading...</p>;
+  // TODO 
+  // work on number pagination navigation
 
 
   return (
@@ -46,8 +53,17 @@ export default function BlogList({ fetchUrl }: BlogListProps): JSX.Element {
           <Button className="mr-2 z-10" disabled={posts.previous ? false : true} variant={posts.previous ? "default" : "ghost"} onClick={() => setUrl(posts.previous)}>Previous</Button>
         }
         {
-          Array.from({ length: Math.ceil(posts.count / posts.results.length) }).map((_, index) => {
-            return (<Button key={index} className="w-fit h-fit rounded-4xl mr-1 z-10">{index + 1}</Button>)
+          Array.from({ length: totalPages }).map((_, index) => {
+            return (
+              <Button
+                key={index}
+                className="w-fit h-fit rounded-4xl mr-1 z-10"
+                onClick={
+                  () => setUrl(
+                    `${postEndpoint}?limit=${postLimit}&offset=${(index) * Number(postLimit)}`
+                  )
+                }
+              >{index + 1}</Button>)
           })
         }
         {
