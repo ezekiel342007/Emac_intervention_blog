@@ -5,14 +5,21 @@ interface Tag {
 
 interface User {
   id: string;
-  username: string;
-  email: string;
+  user_username: string;
+  user_email: string;
 }
 
 interface UserProfile {
   id: string;
   user: User;
   cratedAt: Date;
+}
+
+interface Author {
+  id: string;
+  user_username: string;
+  user_email: string;
+  created_at: Date;
 }
 
 export interface Post {
@@ -22,11 +29,11 @@ export interface Post {
   descripttion: string;
   body: string;
   tags: Tag[];
-  author: UserProfile;
+  author: Author;
   likes: number;
   disLikes: number;
-  postedOn: Date;
-  updatedOn: Date;
+  posted_on: string;
+  updated_on: string;
 }
 
 export interface PostResponse {

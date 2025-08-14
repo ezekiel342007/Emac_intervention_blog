@@ -15,7 +15,7 @@ export default function BlogCard({ postDetail }: BlogCardProps) {
 
   return (
     <Link className="w-fit mb-2" href={`blogs/${postDetail.id}`}>
-      <Card className="py-0 w-fit h-[250] mb-12">
+      <Card className="py-0 w-fit h-[250] mb-12 hover:bg-gray-300">
         <div className="grid grid-rows-2 h-[100%]">
           <Suspense fallback={<ImagePlaceholder width={350} height={150} />}>
             <Image

@@ -4,7 +4,6 @@ import BlogCard from "@/components/function/blog-card";
 import { Post, PostResponse } from "@/types/Posts";
 import { JSX, useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import Link from "next/link";
 
 async function getBlogs(url: string): Promise<PostResponse> {
   const res = await fetch(url);
@@ -48,28 +47,30 @@ export default function BlogList({ fetchUrl }: BlogListProps): JSX.Element {
           })
         }
       </div>
-      <div>
-        {
-          <Button className="mr-2 z-10" disabled={posts.previous ? false : true} variant={posts.previous ? "default" : "ghost"} onClick={() => setUrl(posts.previous)}>Previous</Button>
-        }
-        {
-          Array.from({ length: totalPages }).map((_, index) => {
-            return (
-              <Button
-                key={index}
-                className="w-fit h-fit rounded-4xl mr-1 z-10"
-                onClick={
-                  () => setUrl(
-                    `${postEndpoint}?limit=${postLimit}&offset=${(index) * Number(postLimit)}`
-                  )
-                }
-              >{index + 1}</Button>)
-          })
-        }
-        {
-          <Button className="mr-2 z-10" disabled={posts.next ? false : true} variant={posts.next ? "default" : "ghost"} onClick={() => setUrl(posts.next)}>Next</Button>
-        }
+      <div className="flex justify-center">
+        <div>
+          {
+            <Button className="mr-2 z-10" disabled={posts.previous ? false : true} variant={posts.previous ? "default" : "ghost"} onClick={() => setUrl(posts.previous)}>Previous</Button>
+          }
+          {
+            Array.from({ length: totalPages }).map((_, index) => {
+              return (
+                <Button
+                  key={index}
+                  className="w-fit h-fit rounded-4xl mr-1 z-10"
+                  onClick={
+                    () => setUrl(
+                      `${postEndpoint}?limit=${postLimit}&offset=${(index) * Number(postLimit)}`
+                    )
+                  }
+                >{index + 1}</Button>)
+            })
+          }
+          {
+            <Button className="mr-2 z-10" disabled={posts.next ? false : true} variant={posts.next ? "default" : "ghost"} onClick={() => setUrl(posts.next)}>Next</Button>
+          }
 
+        </div>
       </div>
     </div >
   )

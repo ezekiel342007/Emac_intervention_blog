@@ -43,7 +43,7 @@ export default function RootLayout({
                   <NavigationMenuLink href="/">Home</NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuLink href="blogs/">Blogs</NavigationMenuLink>
+                  <NavigationMenuLink href="/blogs/">Blogs</NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuLink>Tech</NavigationMenuLink>

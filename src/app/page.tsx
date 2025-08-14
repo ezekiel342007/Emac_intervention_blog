@@ -4,7 +4,7 @@ import { Post } from "@/types/Posts";
 import { JSX } from "react";
 
 async function getMostTrendingPost(): Promise<any> {
-  const TRENDINGPOSTURL = process.env.LATEST_POSTS_ENDPOINT;
+  const TRENDINGPOSTURL = process.env.NEXT_PUBLIC_LATEST_POSTS_ENDPOINT;
   const res: Response = await fetch(`${TRENDINGPOSTURL}`);
   if (!res.ok) {
     throw new Error("Failed to fetch");
