@@ -34,12 +34,12 @@ export default function Page(): JSX.Element {
   return (
     <div className="m-12">
       <div className="mb-5 flex justify-between w-full">
-        <Link href="/blogs/">All Posts</Link>
+        <Button variant={"outline"} onClick={() => setUrl(process.env.NEXT_PUBLIC_PAGINATED_ALL_POSTS_ENDPOINT as string)}>All Posts</Button>
         <ul className="flex space-x-4 relative left-0">
-          <li><Button onClick={() => setUrl(process.env.NEXT_PUBLIC_LATEST_POSTS_ENDPOINT as string)}>Trending</Button></li>
-          <li><Button >Read</Button></li>
-          <li><Button >Unread</Button></li>
-          <li><Button onClick={() => setUrl(process.env.NEXT_PUBLIC_LATEST_POSTS_ENDPOINT as string)}>Latest</Button></li>
+          <li><Button variant={"outline"} onClick={() => setUrl(process.env.NEXT_PUBLIC_LATEST_POSTS_ENDPOINT as string)}>Trending</Button></li>
+          <li><Button variant={"outline"}>Read</Button></li>
+          <li><Button variant={"outline"}>Unread</Button></li>
+          <li><Button variant={"outline"} onClick={() => setUrl(process.env.NEXT_PUBLIC_LATEST_POSTS_ENDPOINT as string)}>Latest</Button></li>
         </ul>
       </div>
       <div>
