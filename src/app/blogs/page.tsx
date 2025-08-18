@@ -5,6 +5,7 @@ import { JSX, useEffect, useState } from "react";
 import BlogCard from "@/components/function/blog-card";
 import { Post, PostResponse } from "@/types/Posts";
 import { Button } from "../../components/ui/button";
+import Image from "next/image";
 
 async function getBlogs(url: string): Promise<PostResponse> {
   const res = await fetch(url);
@@ -24,7 +25,7 @@ export default function Page(): JSX.Element {
   useEffect(() => {
     setLoading(true);
     getBlogs(url)
-      .then((data) => setPosts(data))
+      .then((data: PostResponse) => setPosts(data))
       .finally(() => setLoading(false));
   }, [url]);
 
@@ -38,6 +39,16 @@ export default function Page(): JSX.Element {
       <div className="fixed left-0 top-12 m-12 w-full">
         <div className="bg-white relative left-9 py-3 flex justify-between w-[86vw]">
           <Button variant={"outline"} onClick={() => setUrl(process.env.NEXT_PUBLIC_PAGINATED_ALL_POSTS_ENDPOINT as string)}>All Posts</Button>
+          <div className="w-full p-1.5 pr-5">
+            <Link className="flex flex-row gap-1 justify-end" href={"/blogs/write_blog/"}>
+              <Image
+                src={"/images/blogging_1069159.png"}
+                alt="blog post symbol"
+                width={20}
+                height={20}
+              />Write blog
+            </Link>
+          </div>
           <ul className="flex space-x-4 relative left-0">
             <li><Button variant={"outline"} onClick={() => setUrl(process.env.NEXT_PUBLIC_LATEST_POSTS_ENDPOINT as string)}>Trending</Button></li>
             <li><Button variant={"outline"}>Read</Button></li>

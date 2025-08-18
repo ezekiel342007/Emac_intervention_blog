@@ -36,6 +36,15 @@ export interface Post {
   updated_on: string;
 }
 
+export interface ImageType {
+  id: string;
+  author: string;
+  width: number;
+  height: number;
+  url: string;
+  download_url: string;
+}
+
 export interface PostResponse {
   results: Post[];
   next: string;
