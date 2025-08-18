@@ -3,7 +3,7 @@
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, JSX, SetStateAction } from "react";
 import { Button } from "../ui/button";
 
 interface SignInFormProps {
@@ -14,7 +14,14 @@ interface SignInFormProps {
   onSubmitAction: () => {}
 }
 
-export default function SignInForm({ username, password, setUsername, setPassword, onSubmitAction }: SignInFormProps) {
+export default function SignInForm(
+  {
+    username,
+    password,
+    setUsername,
+    setPassword,
+    onSubmitAction
+  }: SignInFormProps): JSX.Element {
   return (
     <div className="flex justify-center">
       <Card className="p-4 w-fit">
