@@ -68,7 +68,7 @@ export default function WriteBlogForm(
             <Card className="px-2">
               {(imageUrl == "") ?
                 <div>
-                  <div className="flex justify-center">
+                  <div className="flex justify-center mb-3">
                     <h3>Pick a cover image</h3>
                   </div>
                   <div className="grid grid-cols-4">
@@ -88,26 +88,26 @@ export default function WriteBlogForm(
                       })
                     }
                   </div>
-                  <div className="flex flex-row justify-center space-x-3">
+                  <div className="flex flex-row justify-center mt-3 space-x-3">
                     <Button onClick={() => setPageNum(pageNum - 1)}>Previous</Button>
                     <Button onClick={() => setPageNum(pageNum + 1)}>Next</Button>
                   </div>
                 </div>
                 :
                 <div>
-                  <div className="flex flex-row space-x-5">
+                  <div className="flex flex-row justify-between">
                     <Label htmlFor="imageUrl">Cover image</Label>
-                    <Button variant={"outline"} className="flex flex-row" onClick={() => { setImageUrl("") }}>
-                      <div className="">
+                    <div className="pb-3">
+                      <Button variant={"outline"} className="flex flex-row mb-3" onClick={() => { setImageUrl("") }}>
                         <Image
                           src={"/images/reset.png"}
                           alt="reset symbol"
-                          width={30}
-                          height={30}
+                          width={25}
+                          height={25}
                         />
-                      </div>
-                      Pick again
-                    </Button>
+                        Pick again
+                      </Button>
+                    </div>
                   </div>
                   <Input id="imageUrl" value={imageUrl} disabled />
                 </div>
