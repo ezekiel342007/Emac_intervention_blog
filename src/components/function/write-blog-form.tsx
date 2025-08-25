@@ -4,7 +4,7 @@ import { Input } from "../ui/input"
 import { Textarea } from "../ui/textarea"
 import { Dispatch, JSX, SetStateAction, useEffect, useState } from "react"
 import { Button } from "../ui/button"
-import { ImageType } from "@/types/Posts"
+import { ImageType, Tag } from "@/types/Posts"
 import Image from "next/image"
 
 interface WriteBlogFormProps {
@@ -16,11 +16,21 @@ interface WriteBlogFormProps {
   setImageUrl: Dispatch<SetStateAction<string>>;
   body: string;
   setBody: Dispatch<SetStateAction<string>>;
+  tags: Tag[];
+  setTags: Dispatch<SetStateAction<Tag[]>>;
   onHandleSubmit: () => void;
 }
 
 async function getImages(num: number): Promise<ImageType[]> {
   const res = await fetch(`https://picsum.photos/v2/list?page=${num}&limit=12`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch");
+  }
+  return res.json();
+}
+
+async function getTags(): Promise<Tag[]> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_TAGS_ENDPOINT}`);
   if (!res.ok) {
     throw new Error("Failed to fetch");
   }
@@ -33,19 +43,32 @@ export default function WriteBlogForm(
     description,
     body,
     imageUrl,
+    tags,
     setTitle,
     setDescription,
     setBody,
     setImageUrl,
+    setTags,
     onHandleSubmit
   }: WriteBlogFormProps): JSX.Element {
   const [pageNum, setPageNum] = useState(1);
   const [images, setImages] = useState<ImageType[] | null>(null);
   const [loading, setLoading] = useState(true);
+  const [blogTags, setBlogTags] = useState<Tag[]>([]);
+
+
+  function toggleTag(tag: Tag): void {
+    if (tags.includes(tag))
+      setTags(tags.filter((t: Tag): boolean => t !== tag));
+    else
+      setTags([...tags, tag]);
+  }
 
   useEffect(
     () => {
       setLoading(true);
+      getTags()
+        .then((tagList: Tag[]): void => { setBlogTags([...tagList]) });
       getImages(pageNum)
         .then((data: ImageType[]) => setImages(data))
         .finally(() => setLoading(false))
@@ -113,6 +136,17 @@ export default function WriteBlogForm(
                 </div>
               }
             </Card>
+          </div>
+          <div className="mt-5">
+            <Label>Tags</Label>
+            <div className="mt-3 space-x-3">
+              {
+                blogTags.map(
+                  (tag: Tag): JSX.Element => {
+                    return (<Button variant={tags.includes(tag) ? "default" : "outline"} key={tag.id} onClick={() => toggleTag(tag)}>{tag.name}</Button>);
+                  })
+              }
+            </div>
           </div>
 
           <div>

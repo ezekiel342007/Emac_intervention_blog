@@ -1,6 +1,7 @@
 "use client"
 
 import WriteBlogForm from "@/components/function/write-blog-form";
+import { Tag } from "@/types/Posts";
 import { useState } from "react"
 
 export default function WriteBlogPage() {
@@ -9,7 +10,7 @@ export default function WriteBlogPage() {
   const [description, setDescription] = useState("");
   const [author, setAuthor] = useState("");
   const [body, setBody] = useState("");
-  const [tags, setTags] = useState("");
+  const [tags, setTags] = useState<Tag[]>([]);
 
   async function onHandleSubmit() {
     event?.preventDefault();
@@ -21,7 +22,8 @@ export default function WriteBlogPage() {
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("accessToken")}`
           },
           body: JSON.stringify({ title, description, body, imageUrl })
         }
@@ -47,6 +49,8 @@ export default function WriteBlogPage() {
         setBody={setBody}
         imageUrl={imageUrl}
         setImageUrl={setImageUrl}
+        tags={tags}
+        setTags={setTags}
         onHandleSubmit={onHandleSubmit}
       />
     </div>
