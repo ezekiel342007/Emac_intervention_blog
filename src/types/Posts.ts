@@ -9,17 +9,17 @@ interface User {
   user_email: string;
 }
 
-interface UserProfile {
+export interface UserProfile {
   id: string;
   user: User;
-  cratedAt: Date;
+  created_at: string;
 }
 
 interface Author {
   id: string;
   user_username: string;
   user_email: string;
-  created_at: Date;
+  created_at: string;
 }
 
 export interface Post {
@@ -29,7 +29,7 @@ export interface Post {
   descripttion: string;
   body: string;
   tags: Tag[];
-  author: Author;
+  author: UserProfile;
   likes: number;
   disLikes: number;
   posted_on: string;

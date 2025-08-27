@@ -1,18 +1,31 @@
 "use client"
 
 import WriteBlogForm from "@/components/function/write-blog-form";
-import { Tag } from "@/types/Posts";
-import { useState } from "react"
+import { Tag, UserProfile } from "@/types/Posts";
+import { JSX, useState } from "react"
 
-export default function WriteBlogPage() {
+
+export default function WriteBlogPage(): JSX.Element {
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
-  const [author, setAuthor] = useState("");
+  const [author, setAuthor] = useState<UserProfile>(
+    {
+      id: "",
+      user: {
+        id: "",
+        user_username: "",
+        user_email: "",
+
+      },
+      created_at: ""
+
+    }
+  );
   const [body, setBody] = useState("");
   const [tags, setTags] = useState<Tag[]>([]);
 
-  async function onHandleSubmit() {
+  async function onHandleSubmit(): Promise<void> {
     event?.preventDefault();
 
     const postUrl = `${process.env.NEXT_PUBLIC_WRITE_BLOG_ENDPOINT}`;
@@ -25,7 +38,7 @@ export default function WriteBlogPage() {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${localStorage.getItem("accessToken")}`
           },
-          body: JSON.stringify({ title, description, body, imageUrl })
+          body: JSON.stringify({ title, author, description, body, imageUrl })
         }
       );
 
@@ -45,6 +58,8 @@ export default function WriteBlogPage() {
         setTitle={setTitle}
         description={description}
         setDescription={setDescription}
+        author={author}
+        setAuthor={setAuthor}
         body={body}
         setBody={setBody}
         imageUrl={imageUrl}

@@ -4,7 +4,7 @@ import { Input } from "../ui/input"
 import { Textarea } from "../ui/textarea"
 import { Dispatch, JSX, SetStateAction, useEffect, useState } from "react"
 import { Button } from "../ui/button"
-import { ImageType, Tag } from "@/types/Posts"
+import { ImageType, Tag, UserProfile } from "@/types/Posts"
 import Image from "next/image"
 
 interface WriteBlogFormProps {
@@ -18,7 +18,21 @@ interface WriteBlogFormProps {
   setBody: Dispatch<SetStateAction<string>>;
   tags: Tag[];
   setTags: Dispatch<SetStateAction<Tag[]>>;
+  author: UserProfile;
+  setAuthor: Dispatch<SetStateAction<UserProfile>>;
   onHandleSubmit: () => void;
+}
+
+const getCurrentUser = async () => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_CURRENT_USER_ENDPOINT}`);
+    if (!res.ok) {
+      throw new Error("Failed to fetch");
+    }
+    return res.json();
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 async function getImages(num: number): Promise<ImageType[]> {
@@ -44,11 +58,13 @@ export default function WriteBlogForm(
     body,
     imageUrl,
     tags,
+    author,
     setTitle,
     setDescription,
     setBody,
     setImageUrl,
     setTags,
+    setAuthor,
     onHandleSubmit
   }: WriteBlogFormProps): JSX.Element {
   const [pageNum, setPageNum] = useState(1);
@@ -67,6 +83,8 @@ export default function WriteBlogForm(
   useEffect(
     () => {
       setLoading(true);
+      getCurrentUser()
+        .then((user: UserProfile) => setAuthor(user))
       getTags()
         .then((tagList: Tag[]): void => { setBlogTags([...tagList]) });
       getImages(pageNum)
