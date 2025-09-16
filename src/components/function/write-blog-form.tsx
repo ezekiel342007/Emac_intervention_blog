@@ -4,7 +4,7 @@ import { Input } from "../ui/input"
 import { Textarea } from "../ui/textarea"
 import { Dispatch, JSX, SetStateAction, useEffect, useState } from "react"
 import { Button } from "../ui/button"
-import { ImageType, Tag, UserProfile } from "@/types/Posts"
+import { ImageType, Tag } from "@/types/Posts"
 import Image from "next/image"
 
 interface WriteBlogFormProps {
@@ -12,28 +12,15 @@ interface WriteBlogFormProps {
   setTitle: Dispatch<SetStateAction<string>>;
   description: string;
   setDescription: Dispatch<SetStateAction<string>>;
-  imageUrl: string;
+  image_url: string;
   setImageUrl: Dispatch<SetStateAction<string>>;
   body: string;
   setBody: Dispatch<SetStateAction<string>>;
-  tags: Tag[];
-  setTags: Dispatch<SetStateAction<Tag[]>>;
-  author: UserProfile;
-  setAuthor: Dispatch<SetStateAction<UserProfile>>;
+  tags: string[];
+  setTags: Dispatch<SetStateAction<string[]>>;
   onHandleSubmit: () => void;
 }
 
-const getCurrentUser = async () => {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_CURRENT_USER_ENDPOINT}`);
-    if (!res.ok) {
-      throw new Error("Failed to fetch");
-    }
-    return res.json();
-  } catch (error) {
-    console.error(error)
-  }
-}
 
 async function getImages(num: number): Promise<ImageType[]> {
   const res = await fetch(`https://picsum.photos/v2/list?page=${num}&limit=12`);
@@ -56,15 +43,13 @@ export default function WriteBlogForm(
     title,
     description,
     body,
-    imageUrl,
+    image_url,
     tags,
-    author,
     setTitle,
     setDescription,
     setBody,
     setImageUrl,
     setTags,
-    setAuthor,
     onHandleSubmit
   }: WriteBlogFormProps): JSX.Element {
   const [pageNum, setPageNum] = useState(1);
@@ -73,9 +58,9 @@ export default function WriteBlogForm(
   const [blogTags, setBlogTags] = useState<Tag[]>([]);
 
 
-  function toggleTag(tag: Tag): void {
+  function toggleTag(tag: string): void {
     if (tags.includes(tag))
-      setTags(tags.filter((t: Tag): boolean => t !== tag));
+      setTags(tags.filter((t: string): boolean => t !== tag));
     else
       setTags([...tags, tag]);
   }
@@ -83,8 +68,6 @@ export default function WriteBlogForm(
   useEffect(
     () => {
       setLoading(true);
-      getCurrentUser()
-        .then((user: UserProfile) => setAuthor(user))
       getTags()
         .then((tagList: Tag[]): void => { setBlogTags([...tagList]) });
       getImages(pageNum)
@@ -107,7 +90,7 @@ export default function WriteBlogForm(
           </div>
           <div>
             <Card className="px-2">
-              {(imageUrl == "") ?
+              {(image_url == "") ?
                 <div>
                   <div className="flex justify-center mb-3">
                     <h3>Pick a cover image</h3>
@@ -150,7 +133,7 @@ export default function WriteBlogForm(
                       </Button>
                     </div>
                   </div>
-                  <Input id="imageUrl" value={imageUrl} disabled />
+                  <Input id="imageUrl" value={image_url} disabled />
                 </div>
               }
             </Card>
@@ -161,7 +144,7 @@ export default function WriteBlogForm(
               {
                 blogTags.map(
                   (tag: Tag): JSX.Element => {
-                    return (<Button variant={tags.includes(tag) ? "default" : "outline"} key={tag.id} onClick={() => toggleTag(tag)}>{tag.name}</Button>);
+                    return (<Button variant={tags.includes(tag.id) ? "default" : "outline"} key={tag.id} onClick={() => toggleTag(tag.id)}>{tag.name}</Button>);
                   })
               }
             </div>

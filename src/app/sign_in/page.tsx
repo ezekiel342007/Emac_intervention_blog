@@ -28,7 +28,8 @@ export default function SignIn() {
 
       const data: TokenResponse = await response.json();
       if (response.ok) {
-        localStorage.setItem("accessToken", data.access_token);
+        localStorage.setItem("accessToken", data.access);
+        console.log(localStorage.getItem("accessToken"))
         login();
       } else {
         console.error("Login failed", data);

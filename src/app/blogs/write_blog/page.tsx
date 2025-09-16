@@ -1,32 +1,50 @@
 "use client"
 
-import WriteBlogForm from "@/components/function/write-blog-form";
-import { Tag, UserProfile } from "@/types/Posts";
 import { JSX, useState } from "react"
+import { Tag, User } from "@/types/Posts";
+import { refreshToken } from "@/lib/utils"
+import WriteBlogForm from "@/components/function/write-blog-form";
 
 
 export default function WriteBlogPage(): JSX.Element {
   const [title, setTitle] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [image_url, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
-  const [author, setAuthor] = useState<UserProfile>(
+  const [author, setAuthor] = useState<User>(
     {
       id: "",
-      user: {
-        id: "",
-        user_username: "",
-        user_email: "",
-
-      },
-      created_at: ""
-
+      username: "",
+      email: "",
+      date_joined: ""
     }
   );
   const [body, setBody] = useState("");
-  const [tags, setTags] = useState<Tag[]>([]);
+  const [tags, setTags] = useState<string[]>([]);
+
+  const getCurrentUser = async () => {
+    refreshToken();
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_CURRENT_USER_ENDPOINT}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("accessToken")}`
+        }
+      });
+      let result = await res.json();
+      if (!res.ok) {
+        console.log(await res.json())
+        throw new Error("Failed to fetch");
+      }
+      return result;
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   async function onHandleSubmit(): Promise<void> {
     event?.preventDefault();
+    getCurrentUser()
+      .then((user: User) => setAuthor(user));
 
     const postUrl = `${process.env.NEXT_PUBLIC_WRITE_BLOG_ENDPOINT}`;
     try {
@@ -38,7 +56,7 @@ export default function WriteBlogPage(): JSX.Element {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${localStorage.getItem("accessToken")}`
           },
-          body: JSON.stringify({ title, author, description, body, imageUrl })
+          body: JSON.stringify({ title, author, description, body, image_url, tags })
         }
       );
 
@@ -58,11 +76,9 @@ export default function WriteBlogPage(): JSX.Element {
         setTitle={setTitle}
         description={description}
         setDescription={setDescription}
-        author={author}
-        setAuthor={setAuthor}
         body={body}
         setBody={setBody}
-        imageUrl={imageUrl}
+        image_url={image_url}
         setImageUrl={setImageUrl}
         tags={tags}
         setTags={setTags}

@@ -32,7 +32,7 @@ export default function NavBar() {
             <NavigationMenuLink>All Categories</NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuLink href={isAuthenticated ? "/profile/" : "/sign_in/"}>{isAuthenticated ? "You" : "Sign in"}</NavigationMenuLink>
+            <NavigationMenuLink href={"/sign_in/"}>{"Sign in"}</NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>

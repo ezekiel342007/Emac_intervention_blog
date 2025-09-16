@@ -3,22 +3,16 @@ export interface Tag {
   name: string;
 }
 
-interface User {
+export interface User {
   id: string;
-  user_username: string;
-  user_email: string;
+  username: string;
+  email: string;
+  date_joined: string;
 }
 
 export interface UserProfile {
   id: string;
   user: User;
-  created_at: string;
-}
-
-interface Author {
-  id: string;
-  user_username: string;
-  user_email: string;
   created_at: string;
 }
 
@@ -29,7 +23,13 @@ export interface Post {
   descripttion: string;
   body: string;
   tags: Tag[];
-  author: UserProfile;
+  author: {
+    id: string,
+    user_email: string,
+    user_username: string,
+    is_author: boolean,
+    created_at: string
+  };
   likes: number;
   disLikes: number;
   posted_on: string;
@@ -53,6 +53,5 @@ export interface PostResponse {
 }
 
 export interface TokenResponse {
-  access_token: string;
-  refresh_token: string;
+  access: string;
 }
