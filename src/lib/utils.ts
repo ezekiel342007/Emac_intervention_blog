@@ -7,19 +7,13 @@ export function cn(...inputs: ClassValue[]) {
 
 export const refreshToken = async (): Promise<void> => {
   try {
-    const respose = await fetch("http://localhost:8000/api/users/refresh/", {
+    await fetch(`${process.env.NEXT_PUBLIC_REFRESH_TOKEN_ENDPOINT}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       credentials: "include"
     });
-
-    // if (respose.ok) {
-    //   const data = await respose.json();
-    // } else {
-    //   console.error("Failed to refresh token: ", await respose.json());
-    // }
   } catch (error) {
     console.error("Error refreshing token: ", error);
   }

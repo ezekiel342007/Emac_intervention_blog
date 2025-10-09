@@ -71,7 +71,7 @@ export default function WriteBlogForm(
       console.log(blogTags);
       getImages(pageNum)
         .then((data: ImageType[]) => setImages(data))
-    }, [pageNum]
+    }, [blogTags, pageNum]
   );
 
   return (
