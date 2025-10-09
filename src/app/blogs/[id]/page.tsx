@@ -2,24 +2,22 @@ import { Post } from "@/types/Posts";
 import Image from "next/image";
 import Link from "next/link";
 
+interface PostPageProps {
+  params: {
+    id: string;
+  }
+}
 
-
-async function getBlogPost(url: string): Promise<Post> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch `);
+export default async function Page({ params }: PostPageProps) {
+  async function getBlogPost(url: string): Promise<Post> {
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`Failed to fetch `);
+    }
+    return res.json();
   }
 
-  return res.json();
-}
-
-type PostPageProps = {
-  id: string;
-}
-
-export default async function Page({ params }: { params: PostPageProps }) {
   const post = await getBlogPost(`${process.env.NEXT_PUBLIC_ALL_POSTS_ENDPOINT}${params.id}`);
-
   const postDate = new Date(post.posted_on);
 
   return (
