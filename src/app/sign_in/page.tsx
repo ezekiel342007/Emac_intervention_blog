@@ -2,12 +2,11 @@
 
 import SignInForm from "@/components/function/sign_in-form";
 import { useAuth } from "@/context/AuthContext";
-import { TokenResponse } from "@/types/Posts";
 import { useState } from "react";
 
 export default function SignIn() {
-  const { login } = useAuth();
-  const [username, setUsername] = useState("");
+  const { setUser } = useAuth();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const onSubitAction = async (): Promise<void> => {
@@ -22,30 +21,22 @@ export default function SignIn() {
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ username, password })
+          credentials: "include",
+          body: JSON.stringify({ email, password })
         }
       );
-
-      const data: TokenResponse = await response.json();
-      if (response.ok) {
-        localStorage.setItem("accessToken", data.access);
-        console.log(localStorage.getItem("accessToken"))
-        login();
-      } else {
-        console.error("Login failed", data);
-      }
-
+      setUser((await response.json()));
     } catch (error) {
-      console.error("Network error", error);
+      console.error("Login Error: ", error);
     }
   }
 
   return (
     <
       SignInForm
-      username={username}
+      email={email}
       password={password}
-      setUsername={setUsername}
+      setEmail={setEmail}
       setPassword={setPassword}
       onSubmitAction={onSubitAction}
     />

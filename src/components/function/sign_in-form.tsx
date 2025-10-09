@@ -7,18 +7,18 @@ import { Dispatch, JSX, SetStateAction } from "react";
 import { Button } from "../ui/button";
 
 interface SignInFormProps {
-  username: string;
+  email: string;
   password: string;
-  setUsername: Dispatch<SetStateAction<string>>
+  setEmail: Dispatch<SetStateAction<string>>
   setPassword: Dispatch<SetStateAction<string>>
-  onSubmitAction: () => {}
+  onSubmitAction: () => Promise<void>
 }
 
 export default function SignInForm(
   {
-    username,
+    email,
     password,
-    setUsername,
+    setEmail,
     setPassword,
     onSubmitAction
   }: SignInFormProps): JSX.Element {
@@ -27,14 +27,14 @@ export default function SignInForm(
       <Card className="p-4 w-fit">
         <form onSubmit={onSubmitAction}>
           <div className="mb-6 mt-4">
-            <Label className="mb-2" htmlFor="username">Username</Label>
+            <Label className="mb-2" htmlFor="username">Email</Label>
             <Input
-              value={username}
+              value={email}
               size={70}
-              type="text"
+              type="email"
               id="username"
               placeholder="username"
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="mb-5 mt-4">

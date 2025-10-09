@@ -1,6 +1,7 @@
 "use client";
 
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { User } from "@/types/Posts";
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -8,35 +9,37 @@ interface AuthProviderProps {
 
 interface AuthContextType {
   isAuthenticated: boolean;
+  user: User | undefined;
+  setUser: Dispatch<SetStateAction<User | undefined>>;
   login: () => void;
   logout: () => void;
-  loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
+  user: undefined,
+  setUser: () => { },
   login: () => { },
   logout: () => { },
-  loading: true
 });
+
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAuthenticated, setAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("accessToken");
-    if (storedToken)
+    if (user)
       setAuthenticated(true);
-  });
+  }, []);
 
   const login = () => setAuthenticated(true);
   const logout = () => setAuthenticated(false);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, loading }}>
+    <AuthContext.Provider value={{ isAuthenticated, setUser, user, login, logout }}>
       {children}
-    </AuthContext.Provider >
+    </AuthContext.Provider>
   )
 }
 

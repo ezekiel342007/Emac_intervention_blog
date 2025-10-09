@@ -1,12 +1,14 @@
 "use client"
 
-import { JSX, useState } from "react"
-import { Tag, User } from "@/types/Posts";
+import { JSX, useEffect, useState } from "react";
+import { User } from "@/types/Posts";
 import { refreshToken } from "@/lib/utils"
+import { useAuth } from "@/context/AuthContext";
 import WriteBlogForm from "@/components/function/write-blog-form";
 
 
 export default function WriteBlogPage(): JSX.Element {
+  const { user } = useAuth();
   const [title, setTitle] = useState("");
   const [image_url, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
@@ -15,36 +17,23 @@ export default function WriteBlogPage(): JSX.Element {
       id: "",
       username: "",
       email: "",
-      date_joined: ""
     }
   );
   const [body, setBody] = useState("");
   const [tags, setTags] = useState<string[]>([]);
 
-  const getCurrentUser = async () => {
-    refreshToken();
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_CURRENT_USER_ENDPOINT}`, {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("accessToken")}`
-        }
-      });
-      let result = await res.json();
-      if (!res.ok) {
-        console.log(await res.json())
-        throw new Error("Failed to fetch");
-      }
-      return result;
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  useEffect(
+    () => {
+      console.log(user);
+      if (user)
+        setAuthor(user)
+    }, []
+  )
 
   async function onHandleSubmit(): Promise<void> {
     event?.preventDefault();
-    getCurrentUser()
-      .then((user: User) => setAuthor(user));
+    // getCurrentUser()
+    //   .then((user: User) => setAuthor(user));
 
     const postUrl = `${process.env.NEXT_PUBLIC_WRITE_BLOG_ENDPOINT}`;
     try {
@@ -54,15 +43,17 @@ export default function WriteBlogPage(): JSX.Element {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("accessToken")}`
           },
+          credentials: "include",
           body: JSON.stringify({ title, author, description, body, image_url, tags })
         }
       );
 
-      if (response.ok) {
+      if (response.status == 401)
+        refreshToken();
+
+      if (response.ok)
         alert("Post successful");
-      }
 
     } catch (error) {
       console.log("Network Error", error);

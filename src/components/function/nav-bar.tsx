@@ -10,7 +10,7 @@ import { useAuth } from "@/context/AuthContext";
 
 export default function NavBar() {
 
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
 
   return <div className="mb-36">
     <div className="flex justify-center fixed bg-white h-fit top-0 p-5 w-[100vw] z-50">
@@ -32,7 +32,7 @@ export default function NavBar() {
             <NavigationMenuLink>All Categories</NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuLink href={"/sign_in/"}>{"Sign in"}</NavigationMenuLink>
+            <NavigationMenuLink href={"/sign_in/"}>{isAuthenticated ? user?.username : "Sign in"}</NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>

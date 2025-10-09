@@ -54,7 +54,6 @@ export default function WriteBlogForm(
   }: WriteBlogFormProps): JSX.Element {
   const [pageNum, setPageNum] = useState(1);
   const [images, setImages] = useState<ImageType[] | null>(null);
-  const [loading, setLoading] = useState(true);
   const [blogTags, setBlogTags] = useState<Tag[]>([]);
 
 
@@ -67,12 +66,11 @@ export default function WriteBlogForm(
 
   useEffect(
     () => {
-      setLoading(true);
       getTags()
         .then((tagList: Tag[]): void => { setBlogTags([...tagList]) });
+      console.log(blogTags);
       getImages(pageNum)
         .then((data: ImageType[]) => setImages(data))
-        .finally(() => setLoading(false))
     }, [pageNum]
   );
 
