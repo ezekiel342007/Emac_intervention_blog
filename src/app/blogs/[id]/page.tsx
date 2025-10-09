@@ -2,13 +2,13 @@ import { Post } from "@/types/Posts";
 import Image from "next/image";
 import Link from "next/link";
 
-interface PostPageProps {
-  params: {
-    id: string;
-  }
-}
+type PostPageProps = Promise<{
+  id: string;
+}>
 
-export default async function Page({ params }: PostPageProps) {
+export default async function Page({ params }: { params: PostPageProps }) {
+  const id = await params;
+
   async function getBlogPost(url: string): Promise<Post> {
     const res = await fetch(url);
     if (!res.ok) {
@@ -17,7 +17,7 @@ export default async function Page({ params }: PostPageProps) {
     return res.json();
   }
 
-  const post = await getBlogPost(`${process.env.NEXT_PUBLIC_ALL_POSTS_ENDPOINT}${params.id}`);
+  const post = await getBlogPost(`${process.env.NEXT_PUBLIC_ALL_POSTS_ENDPOINT}${id}`);
   const postDate = new Date(post.posted_on);
 
   return (
