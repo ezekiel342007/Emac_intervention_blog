@@ -26,7 +26,7 @@ const AuthContext = createContext<AuthContextType>({
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAuthenticated, setAuthenticated] = useState(false);
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<User | undefined>(undefined);
 
   useEffect(() => {
     if (user)
