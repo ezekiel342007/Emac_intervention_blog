@@ -27,7 +27,7 @@ export default function WriteBlogPage(): JSX.Element {
       console.log(user);
       if (user)
         setAuthor(user)
-    }, []
+    }, [user]
   )
 
   async function onHandleSubmit(): Promise<void> {
