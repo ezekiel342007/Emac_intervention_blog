@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -49,6 +50,7 @@ export default function SignInForm(
             />
           </div>
           <Button type="submit">Sign in</Button>
+          <p>Not registered? <Link href={"/register"}>Sign up</Link></p>
         </form>
       </Card>
     </div>
