@@ -12,6 +12,8 @@ export default function NavBar() {
 
   const { isAuthenticated, user } = useAuth();
 
+  alert("You are not signed in. <a href='/sign_in'>Sign in</a>")
+
   return <div className="mb-36">
     <div className="flex justify-center fixed bg-white h-fit top-0 p-5 w-[100vw] z-50">
       <NavigationMenu className="mt-5">

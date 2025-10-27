@@ -2,11 +2,12 @@
 
 import SignUpForm from "@/components/function/register-form";
 import { useAuth } from "@/context/AuthContext";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 
 
 export default function Register() {
-  const { setUser } = useAuth();
+  const { setUser, user } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -28,9 +29,11 @@ export default function Register() {
         }
       );
       setUser((await response.json()));
+      console.log(user);
     } catch (error) {
       console.error("Login Error: ", error);
     }
+    redirect("/")
   }
 
   return (

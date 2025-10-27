@@ -25,7 +25,9 @@ export default function SignIn() {
           body: JSON.stringify({ email, password })
         }
       );
-      setUser((await response.json()));
+      let res = await response.json();
+      console.log("Login Error: ", res)
+
     } catch (error) {
       console.error("Login Error: ", error);
     }
