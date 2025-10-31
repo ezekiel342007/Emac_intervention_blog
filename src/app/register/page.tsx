@@ -8,9 +8,9 @@ import { useState } from "react";
 
 export default function Register() {
   const { setUser, user } = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmailAction] = useState("");
+  const [password, setPasswordAction] = useState("");
+  const [username, setUsernameAction] = useState("");
 
   const onSubitAction = async (): Promise<void> => {
     event?.preventDefault();
@@ -42,9 +42,9 @@ export default function Register() {
       email={email}
       password={password}
       username={username}
-      setEmail={setEmail}
-      setPassword={setPassword}
-      setUsername={setUsername}
+      setEmailAction={setEmailAction}
+      setPasswordAction={setPasswordAction}
+      setUsernameAction={setUsernameAction}
       onSubmitAction={onSubitAction}
     />
   )
