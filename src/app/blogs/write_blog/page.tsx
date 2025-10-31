@@ -32,6 +32,9 @@ export default function WriteBlogPage(): JSX.Element {
 
   async function onHandleSubmit(): Promise<void> {
     event?.preventDefault();
+    // getCurrentUser()
+    //   .then((user: User) => setAuthor(user));
+    //   .then((user: User) => setAuthor(user));
 
     const postUrl = `${process.env.NEXT_PUBLIC_WRITE_BLOG_ENDPOINT}`;
     try {
