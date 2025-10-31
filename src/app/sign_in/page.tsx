@@ -26,7 +26,8 @@ export default function SignIn() {
         }
       );
       let res = await response.json();
-      console.log("Login Error: ", res)
+      console.log("we have error", res);
+      setUser(res);
 
     } catch (error) {
       console.error("Login Error: ", error);
@@ -43,4 +44,5 @@ export default function SignIn() {
       onSubmitAction={onSubitAction}
     />
   )
+}
 // 2257539759
