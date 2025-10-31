@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -31,12 +30,12 @@ export default function SignUpForm(
     <div className="flex justify-center">
       <Card className="p-4 w-fit">
         <form onSubmit={onSubmitAction}>
-          <div className="mb-6 mt-4 flex flex-row gap-3">
+          <div className="mb-6 mt-4 flex flex-col cols-">
             <div className="">
               <Label className="mb-2" htmlFor="email">Email</Label>
               <Input
                 value={email}
-                size={35}
+                size={70}
                 type="email"
                 id="email"
                 placeholder="example@mail.com"
@@ -46,12 +45,12 @@ export default function SignUpForm(
             <div>
               <Label className="mb-2" htmlFor="username">Username</Label>
               <Input
-                value={username}
-                size={35}
+                value={email}
+                size={70}
                 type="text"
                 id="username"
                 placeholder="John Doe"
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
           </div>
@@ -66,7 +65,8 @@ export default function SignUpForm(
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <Button type="submit">Register</Button>
+          <Button type="submit">Sign in</Button>
+          <p>Not registered? </p><Link href={"/register"}>Sign up</Link>
         </form>
       </Card>
     </div>

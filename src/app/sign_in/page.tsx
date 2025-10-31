@@ -25,8 +25,9 @@ export default function SignIn() {
           body: JSON.stringify({ email, password })
         }
       );
-      let res = await response.json();
+      const res = await response.json();
       console.log("we have error", res);
+      localStorage.setItem("user", res);
       setUser(res);
 
     } catch (error) {

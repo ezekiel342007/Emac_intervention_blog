@@ -34,7 +34,7 @@ export default function NavBar() {
             <NavigationMenuLink>All Categories</NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuLink href={"/sign_in/"}>{isAuthenticated ? user?.username : "Sign in"}</NavigationMenuLink>
+            <NavigationMenuLink href={"/sign_in/"}>{isAuthenticated ? localStorage.getItem("user") : "Sign in"}</NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
