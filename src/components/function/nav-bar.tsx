@@ -10,7 +10,7 @@ import { useAuth } from "@/context/AuthContext";
 
 export default function NavBar() {
 
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   alert("You are not signed in. <a href='/sign_in'>Sign in</a>")
 

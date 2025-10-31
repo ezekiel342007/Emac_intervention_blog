@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,9 +11,9 @@ interface SignInFormProps {
   email: string;
   password: string;
   username: string;
-  setEmail: Dispatch<SetStateAction<string>>;
-  setPassword: Dispatch<SetStateAction<string>>;
-  setUsername: Dispatch<SetStateAction<string>>;
+  setEmailAction: Dispatch<SetStateAction<string>>;
+  setPasswordAction: Dispatch<SetStateAction<string>>;
+  setUsernameAction: Dispatch<SetStateAction<string>>;
   onSubmitAction: () => Promise<void>;
 }
 
@@ -21,9 +22,9 @@ export default function SignUpForm(
     email,
     password,
     username,
-    setEmail,
-    setPassword,
-    setUsername,
+    setEmailAction,
+    setPasswordAction,
+    setUsernameAction,
     onSubmitAction
   }: SignInFormProps): JSX.Element {
   return (
@@ -39,18 +40,18 @@ export default function SignUpForm(
                 type="email"
                 id="email"
                 placeholder="example@mail.com"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmailAction(e.target.value)}
               />
             </div>
             <div>
               <Label className="mb-2" htmlFor="username">Username</Label>
               <Input
-                value={email}
+                value={username}
                 size={70}
                 type="text"
                 id="username"
                 placeholder="John Doe"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setUsernameAction(e.target.value)}
               />
             </div>
           </div>
@@ -62,7 +63,7 @@ export default function SignUpForm(
               type="password"
               id="password"
               placeholder="password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPasswordAction(e.target.value)}
             />
           </div>
           <Button type="submit">Sign in</Button>
