@@ -53,9 +53,6 @@ export default function WriteBlogPage(): JSX.Element {
       if (response.status == 401)
         refreshToken();
 
-      if (response.ok)
-        alert("Post successful");
-
     } catch (error) {
       console.log("Network Error", error);
     }

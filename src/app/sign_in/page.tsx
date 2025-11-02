@@ -2,6 +2,7 @@
 
 import SignInForm from "@/components/function/sign_in-form";
 import { useAuth } from "@/context/AuthContext";
+import { refreshToken } from "@/lib/utils"
 import { useState } from "react";
 
 export default function SignIn() {
@@ -26,7 +27,12 @@ export default function SignIn() {
         }
       );
       const res = await response.json();
+      if (response.status == 401)
+        refreshToken();
+
+
       console.log("we have error", res);
+
       localStorage.setItem("user", res);
       localStorage.setItem("isAuthenticated", "true");
       setUser(res);
