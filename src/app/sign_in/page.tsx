@@ -28,6 +28,7 @@ export default function SignIn() {
       const res = await response.json();
       console.log("we have error", res);
       localStorage.setItem("user", res);
+      localStorage.setItem("isAuthenticated", "true");
       setUser(res);
 
     } catch (error) {

@@ -6,11 +6,8 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu"
-import { useAuth } from "@/context/AuthContext";
 
 export default function NavBar() {
-
-  const { isAuthenticated } = useAuth();
 
   return <div className="mb-36">
     <div className="flex justify-center fixed bg-white h-fit top-0 p-5 w-[100vw] z-50">
@@ -32,7 +29,7 @@ export default function NavBar() {
             <NavigationMenuLink>All Categories</NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuLink href={"/sign_in/"}>{isAuthenticated ? localStorage.getItem("user") : "Sign in"}</NavigationMenuLink>
+            <NavigationMenuLink href={"/sign_in/"}>{localStorage.getItem("isAuthenticated") == "true" ? localStorage.getItem("user") : "Sign in"}</NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
