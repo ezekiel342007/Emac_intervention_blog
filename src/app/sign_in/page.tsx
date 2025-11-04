@@ -33,7 +33,6 @@ export default function SignIn() {
 
       setUser(res);
 
-
     } catch (error) {
       console.error("Login Error: ", error);
     }
@@ -43,6 +42,7 @@ export default function SignIn() {
     localStorage.setItem("userEmail", user ? user.email : "");
     localStorage.setItem("userId", user ? user.id : "");
     localStorage.setItem("userName", user ? user.username : "");
+    localStorage.setItem("isAuthenticated", "true");
   }, [user])
 
 
