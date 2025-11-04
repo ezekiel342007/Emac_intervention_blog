@@ -2,12 +2,12 @@ import { Post } from "@/types/Posts";
 import Image from "next/image";
 import Link from "next/link";
 
-type PostPageProps = Promise<{
+type PostPageProps = {
   id: string;
-}>
+}
 
 export default async function Page({ params }: { params: PostPageProps }) {
-  const id = await params;
+  const id = params;
 
   async function getBlogPost(url: string): Promise<Post> {
     const res = await fetch(url);
