@@ -66,12 +66,13 @@ export default function WriteBlogForm(
 
   useEffect(
     () => {
-      getTags()
-        .then((tagList: Tag[]): void => { setBlogTags([...tagList]) });
-      console.log(blogTags);
+      if (blogTags.length < 5) {
+        getTags()
+          .then((tagList: Tag[]): void => { setBlogTags([...tagList]) });
+      }
       getImages(pageNum)
         .then((data: ImageType[]) => setImages(data))
-    }, [blogTags, pageNum]
+    }, [pageNum]
   );
 
   return (
