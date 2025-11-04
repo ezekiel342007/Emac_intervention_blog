@@ -2,8 +2,8 @@ import { Post } from "@/types/Posts";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default async function Page({ params }: { params: Promise<{ blogId: string }>; }) {
+  const blogId = (await params).blogId;
 
   async function getBlogPost(url: string): Promise<Post> {
     const res = await fetch(url);
@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     return res.json();
   }
 
-  const post = await getBlogPost(`${process.env.NEXT_PUBLIC_ALL_POSTS_ENDPOINT}${id}`);
+  const post = await getBlogPost(`${process.env.NEXT_PUBLIC_ALL_POSTS_ENDPOINT}${blogId}`);
   const postDate = new Date(post.posted_on);
 
   return (
