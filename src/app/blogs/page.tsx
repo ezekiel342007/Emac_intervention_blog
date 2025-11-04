@@ -31,9 +31,6 @@ export default function Page(): JSX.Element {
 
   const totalPages = posts?.results.length ? Math.ceil((posts.count ?? 0) / posts.results.length) : 0;
 
-  // TODO
-  // working on blogs page ui
-
   return (
     <>
       <div className="fixed left-0 top-12 m-12 w-full">

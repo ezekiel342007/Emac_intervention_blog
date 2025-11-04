@@ -32,7 +32,7 @@ export default function SignUpForm(
       <Card className="p-4 w-fit">
         <form onSubmit={onSubmitAction}>
           <div className="mb-6 mt-4 flex flex-col cols-">
-            <div className="">
+            <div className="mb-5">
               <Label className="mb-2" htmlFor="email">Email</Label>
               <Input
                 value={email}
@@ -43,7 +43,7 @@ export default function SignUpForm(
                 onChange={(e) => setEmailAction(e.target.value)}
               />
             </div>
-            <div>
+            <div className="mb-5">
               <Label className="mb-2" htmlFor="username">Username</Label>
               <Input
                 value={username}
@@ -55,7 +55,7 @@ export default function SignUpForm(
               />
             </div>
           </div>
-          <div className="mb-5 mt-4">
+          <div className="mb-5">
             <Label className="mb-2" htmlFor="password">Password</Label>
             <Input
               value={password}
