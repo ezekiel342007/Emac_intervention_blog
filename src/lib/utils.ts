@@ -19,15 +19,3 @@ export const refreshToken = async (): Promise<void> => {
     console.error("Error refreshing token: ", error);
   }
 }
-
-
-export const userDetails = async (): Promise<void> => {
-  const { setUser } = useAuth();
-  const response = await fetch(`${process.env.NEXT_PUBLIC_CURRENT_USER_ENDPOINT}`);
-
-  if (!response.ok) {
-    throw new Error("UserDetailsError: ", await response.json())
-  }
-
-  setUser(await response.json());
-}

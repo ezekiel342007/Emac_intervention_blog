@@ -7,10 +7,19 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu"
 import { useEffect } from "react";
-import { userDetails } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
 
 export default function NavBar() {
+  const userDetails = async (): Promise<void> => {
+    const { setUser } = useAuth();
+    const response = await fetch(`${process.env.NEXT_PUBLIC_CURRENT_USER_ENDPOINT}`);
+
+    if (!response.ok) {
+      throw new Error("UserDetailsError: ", await response.json())
+    }
+
+    setUser(await response.json());
+  }
   const { user } = useAuth();
 
   useEffect(() => {
