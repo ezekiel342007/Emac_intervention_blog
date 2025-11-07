@@ -15,7 +15,7 @@ export default function NavBar() {
   let userName;
   useEffect(() => {
     userDetails().then((data: User) => { localStorage.setItem("currentUser", JSON.stringify(data)) });
-    let userData = localStorage.getItem("currentUser");
+    const userData = localStorage.getItem("currentUser");
     if (userData)
       userName = JSON.parse(userData);
   }, [userName]);
