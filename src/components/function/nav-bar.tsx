@@ -23,7 +23,8 @@ export default function NavBar() {
   }, [setUser]);
 
   useEffect(() => {
-    userDetails();
+    if (typeof window !== "undefined")
+      userDetails();
   }, [userDetails]);
 
   return <div className="mb-36">
