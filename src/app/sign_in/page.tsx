@@ -39,9 +39,7 @@ export default function SignIn() {
   }
 
   useEffect(() => {
-    localStorage.setItem("userEmail", user ? user.email : "");
-    localStorage.setItem("userId", user ? user.id : "");
-    localStorage.setItem("userName", user ? user.username : "");
+    localStorage.setItem("currentUser", user ? JSON.stringify(user) : "{}");
     localStorage.setItem("isAuthenticated", "true");
   }, [user])
 

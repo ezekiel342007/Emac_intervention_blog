@@ -1,3 +1,4 @@
+import { User } from "@/types/Posts";
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -17,4 +18,14 @@ export const refreshToken = async (): Promise<void> => {
   } catch (error) {
     console.error("Error refreshing token: ", error);
   }
+}
+
+
+export const userDetails = async (): Promise<User> => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_CURRENT_USER_ENDPOINT}`);
+
+  if (!response.ok) {
+    throw new Error("UserDetailsError: ", await response.json())
+  }
+  return await response.json()
 }

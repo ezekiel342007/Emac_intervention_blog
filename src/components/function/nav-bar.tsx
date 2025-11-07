@@ -6,13 +6,18 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu"
+import { User } from "@/types/Posts";
+import { userDetails } from "@/lib/utils";
 import { useEffect } from "react";
 
 export default function NavBar() {
 
   let userName;
   useEffect(() => {
-    userName = localStorage.getItem("userName");
+    userDetails().then((data: User) => { localStorage.setItem("currentUser", JSON.stringify(data)) });
+    let userData = localStorage.getItem("currentUser");
+    if (userData)
+      userName = JSON.parse(userData);
   }, [userName]);
 
   return <div className="mb-36">
