@@ -10,8 +10,9 @@ import { useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 
 export default function NavBar() {
+  const { user, setUser } = useAuth();
+
   const userDetails = async (): Promise<void> => {
-    const { setUser } = useAuth();
     const response = await fetch(`${process.env.NEXT_PUBLIC_CURRENT_USER_ENDPOINT}`);
 
     if (!response.ok) {
@@ -20,7 +21,6 @@ export default function NavBar() {
 
     setUser(await response.json());
   }
-  const { user } = useAuth();
 
   useEffect(() => {
     userDetails();
