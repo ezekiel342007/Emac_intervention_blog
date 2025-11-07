@@ -13,13 +13,22 @@ export default function NavBar() {
   const { user, setUser } = useAuth();
 
   const userDetails = useCallback(async (): Promise<void> => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_CURRENT_USER_ENDPOINT}`);
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_CURRENT_USER_ENDPOINT}`);
 
-    if (!response.ok) {
-      throw new Error("UserDetailsError: ", await response.json())
+      if (!response.ok) {
+        if (response.status == 401 || response.status == 403) {
+          setUser(undefined);
+          return;
+        }
+        throw new Error("UserDetailsError: ", await response.json())
+      }
+
+      setUser(await response.json());
+    } catch (error) {
+      console.error("Session verification failed", error);
+      setUser(undefined);
     }
-
-    setUser(await response.json());
   }, [setUser]);
 
   useEffect(() => {
