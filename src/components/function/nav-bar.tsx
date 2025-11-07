@@ -12,7 +12,7 @@ import { useEffect } from "react";
 
 export default function NavBar() {
 
-  let userName;
+  let userName = "";
   let userData;
   useEffect(() => {
     userDetails().then((data: User) => { localStorage.setItem("currentUser", JSON.stringify(data)) });
