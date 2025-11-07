@@ -6,13 +6,13 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu"
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 
 export default function NavBar() {
-  const { user, setUser } = useAuth();
+  const { setUser } = useAuth();
 
-  async function userDetails(): Promise<void> {
+  const userDetails = useCallback(async (): Promise<void> => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_CURRENT_USER_ENDPOINT}`);
 
     if (!response.ok) {
@@ -20,11 +20,11 @@ export default function NavBar() {
     }
 
     setUser(await response.json());
-  }
+  }, [setUser]);
 
   useEffect(() => {
     userDetails();
-  }, [user, userDetails]);
+  }, [userDetails]);
 
   return <div className="mb-36">
     <div className="flex justify-center fixed bg-white h-fit top-0 p-5 w-[100vw] z-50">
