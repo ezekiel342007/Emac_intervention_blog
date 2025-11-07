@@ -13,12 +13,13 @@ import { useEffect } from "react";
 export default function NavBar() {
 
   let userName;
+  let userData;
   useEffect(() => {
     userDetails().then((data: User) => { localStorage.setItem("currentUser", JSON.stringify(data)) });
-    const userData = localStorage.getItem("currentUser");
+    userData = localStorage.getItem("currentUser");
     if (userData)
-      userName = JSON.parse(userData);
-  }, [userName]);
+      userName = JSON.parse(userData).username;
+  }, [userData]);
 
   return <div className="mb-36">
     <div className="flex justify-center fixed bg-white h-fit top-0 p-5 w-[100vw] z-50">
