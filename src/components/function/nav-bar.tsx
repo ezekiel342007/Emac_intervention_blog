@@ -10,7 +10,7 @@ import { useCallback, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 
 export default function NavBar() {
-  const { setUser } = useAuth();
+  const { user, setUser } = useAuth();
 
   const userDetails = useCallback(async (): Promise<void> => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_CURRENT_USER_ENDPOINT}`);
