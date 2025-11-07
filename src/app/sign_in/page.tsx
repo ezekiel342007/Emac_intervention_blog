@@ -3,10 +3,10 @@
 import SignInForm from "@/components/function/sign_in-form";
 import { useAuth } from "@/context/AuthContext";
 import { refreshToken } from "@/lib/utils"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function SignIn() {
-  const { setUser, user } = useAuth();
+  const { setUser } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -37,12 +37,6 @@ export default function SignIn() {
       console.error("Login Error: ", error);
     }
   }
-
-  useEffect(() => {
-    localStorage.setItem("currentUser", user ? JSON.stringify(user) : "{}");
-    localStorage.setItem("isAuthenticated", "true");
-  }, [user])
-
 
   return (
     <

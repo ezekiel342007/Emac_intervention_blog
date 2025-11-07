@@ -6,20 +6,16 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu"
-import { User } from "@/types/Posts";
-import { userDetails } from "@/lib/utils";
 import { useEffect } from "react";
+import { userDetails } from "@/lib/utils";
+import { useAuth } from "@/context/AuthContext";
 
 export default function NavBar() {
+  const { user } = useAuth();
 
-  let userName = "";
-  let userData;
   useEffect(() => {
-    userDetails().then((data: User) => { localStorage.setItem("currentUser", JSON.stringify(data)) });
-    userData = localStorage.getItem("currentUser");
-    if (userData)
-      userName = JSON.parse(userData).username;
-  }, [userData]);
+    userDetails();
+  }, [user]);
 
   return <div className="mb-36">
     <div className="flex justify-center fixed bg-white h-fit top-0 p-5 w-[100vw] z-50">
@@ -41,7 +37,7 @@ export default function NavBar() {
             <NavigationMenuLink>All Categories</NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuLink href={"/sign_in/"}>{(userName !== "") ? userName : "Sign in"}</NavigationMenuLink>
+            <NavigationMenuLink href={"/sign_in/"}>{user ? user.username : "Sign in"}</NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
