@@ -16,24 +16,23 @@ export default function NavBar() {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_CURRENT_USER_ENDPOINT}`);
 
-      if (!response.ok) {
-        if (response.status == 401 || response.status == 403) {
-          setUser(undefined);
-          return;
-        }
-        throw new Error("UserDetailsError: ", await response.json())
+      if (response.status == 401 || response.status == 403) {
+        setUser(undefined);
+        return;
       }
+
+      if (!response.ok)
+        throw new Error("UserDetailsError: ", await response.json())
 
       setUser(await response.json());
     } catch (error) {
-      console.error("Session verification failed", error);
       setUser(undefined);
+      console.error("Session verification failed", error);
     }
   }, [setUser]);
 
   useEffect(() => {
-    if (typeof window !== "undefined")
-      userDetails();
+    userDetails();
   }, [userDetails]);
 
   return <div className="mb-36">
