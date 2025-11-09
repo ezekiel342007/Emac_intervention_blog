@@ -9,13 +9,14 @@ import {
 import { useEffect } from "react";
 import { userDetails } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
+import { User } from "@/types/Posts";
 
 export default function NavBar() {
   const { user, setUser } = useAuth();
 
   useEffect(() => {
-    userDetails().then((data: any | undefined) => { setUser(data) });
-  }, [userDetails]);
+    userDetails().then((data: User | undefined) => { setUser(data) });
+  }, [userDetails, setUser]);
 
   return <div className="mb-36">
     <div className="flex justify-center fixed bg-white h-fit top-0 p-5 w-[100vw] z-50">
