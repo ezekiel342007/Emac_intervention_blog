@@ -18,3 +18,22 @@ export const refreshToken = async (): Promise<void> => {
     console.error("Error refreshing token: ", error);
   }
 }
+
+export const userDetails = async (): Promise<any | undefined> => {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_CURRENT_USER_ENDPOINT}`);
+
+    if (response.status == 401 || response.status == 403) {
+      return undefined;
+    }
+
+    if (!response.ok)
+      throw new Error("UserDetailsError: ", await response.json())
+
+    return (await response.json());
+  } catch (error) {
+    console.error("Session verification failed", error);
+    return (undefined);
+  }
+}
+

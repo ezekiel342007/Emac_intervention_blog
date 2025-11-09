@@ -6,33 +6,15 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu"
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
+import { userDetails } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
 
 export default function NavBar() {
   const { user, setUser } = useAuth();
 
-  const userDetails = useCallback(async (): Promise<void> => {
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_CURRENT_USER_ENDPOINT}`);
-
-      if (response.status == 401 || response.status == 403) {
-        setUser(undefined);
-        return;
-      }
-
-      if (!response.ok)
-        throw new Error("UserDetailsError: ", await response.json())
-
-      setUser(await response.json());
-    } catch (error) {
-      setUser(undefined);
-      console.error("Session verification failed", error);
-    }
-  }, [setUser]);
-
   useEffect(() => {
-    userDetails();
+    userDetails().then((data: any | undefined) => { setUser(data) });
   }, [userDetails]);
 
   return <div className="mb-36">
