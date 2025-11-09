@@ -1,3 +1,4 @@
+import { User } from "@/types/Posts";
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -19,7 +20,7 @@ export const refreshToken = async (): Promise<void> => {
   }
 }
 
-export const userDetails = async (): Promise<any | undefined> => {
+export const userDetails = async (): Promise<User | undefined> => {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_CURRENT_USER_ENDPOINT}`);
 
