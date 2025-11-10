@@ -14,9 +14,12 @@ import { User } from "@/types/Posts";
 export default function NavBar() {
   const { user, setUser } = useAuth();
 
-  useEffect(() => {
-    userDetails().then((data: User | undefined) => { setUser(data) });
-  }, [setUser]);
+  useEffect(
+    () => {
+      userDetails().then(
+        (data: User | undefined) => localStorage.setItem("currentUser", JSON.stringify(data))
+      )
+    }, [setUser]);
 
   return <div className="mb-36">
     <div className="flex justify-center fixed bg-white h-fit top-0 p-5 w-[100vw] z-50">
