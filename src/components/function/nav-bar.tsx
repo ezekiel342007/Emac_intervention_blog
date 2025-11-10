@@ -17,7 +17,7 @@ export default function NavBar() {
   useEffect(
     () => {
       userDetails().then(
-        (data: User | undefined) => localStorage.setItem("currentUser", JSON.stringify(data))
+        (data: User | undefined) => setUser(data)
       )
     }, [setUser]);
 
