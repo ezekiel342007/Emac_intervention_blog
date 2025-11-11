@@ -6,21 +6,21 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu"
-import { useEffect } from "react";
-import { userDetails } from "@/lib/utils";
+// import { useEffect } from "react";
+// import { userDetails } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
-import { User } from "@/types/Posts";
+// import { User } from "@/types/Posts";
 
 export default function NavBar() {
-  const { user, setUser } = useAuth();
+  const { user } = useAuth();
 
-  useEffect(
-    () => {
-      userDetails().then(
-        (data: User | undefined) => setUser(data)
-      )
-    }, [setUser]);
-
+  // useEffect(
+  //   () => {
+  //     userDetails().then(
+  //       (data: User | undefined) => setUser(data)
+  //     )
+  //   }, [setUser]);
+  //
   return <div className="mb-36">
     <div className="flex justify-center fixed bg-white h-fit top-0 p-5 w-[100vw] z-50">
       <NavigationMenu className="mt-5">
