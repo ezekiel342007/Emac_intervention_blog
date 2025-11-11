@@ -40,9 +40,6 @@ export default async function Page({ params }: { params: Promise<{ blogId: strin
         <p className="">{post.body}</p>
       </div>
 
-      <div className="w-3xl mb-6">
-        <Button>Like <SolarLikeBroken /></Button>
-      </div>
     </div>
   )
 }
