@@ -66,8 +66,7 @@ export default function SignUpForm(
               onChange={(e) => setPasswordAction(e.target.value)}
             />
           </div>
-          <Button type="submit">Sign in</Button>
-          <p>Not registered? </p><Link href={"/register"}>Sign up</Link>
+          <Button type="submit">Register</Button>
         </form>
       </Card>
     </div>
