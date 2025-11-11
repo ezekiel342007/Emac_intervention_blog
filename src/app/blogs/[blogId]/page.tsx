@@ -1,3 +1,5 @@
+import { SolarLikeBroken } from "@/components/icons";
+import { Button } from "@/components/ui/button";
 import { Post } from "@/types/Posts";
 import Image from "next/image";
 import Link from "next/link";
@@ -38,8 +40,8 @@ export default async function Page({ params }: { params: Promise<{ blogId: strin
         <p className="">{post.body}</p>
       </div>
 
-      <div>
-        <h3 className="text-2xl font-bold">Comments</h3>
+      <div className="w-3xl mb-6">
+        <Button>Like <SolarLikeBroken /></Button>
       </div>
     </div>
   )

@@ -48,8 +48,6 @@ export default function Page(): JSX.Element {
           </div>
           <ul className="flex space-x-4 relative left-0">
             <li><Button variant={"outline"} onClick={() => setUrl(process.env.NEXT_PUBLIC_LATEST_POSTS_ENDPOINT as string)}>Trending</Button></li>
-            <li><Button variant={"outline"}>Read</Button></li>
-            <li><Button variant={"outline"}>Unread</Button></li>
             <li><Button variant={"outline"} onClick={() => setUrl(process.env.NEXT_PUBLIC_LATEST_POSTS_ENDPOINT as string)}>Latest</Button></li>
           </ul>
         </div>
