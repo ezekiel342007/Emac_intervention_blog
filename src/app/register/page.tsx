@@ -31,9 +31,9 @@ export default function Register() {
       setUser((await response.json()));
       console.log(user);
     } catch (error) {
-      console.error("Login Error: ", error);
+      console.error("Register Error: ", error);
     }
-    redirect("/")
+    // redirect("/")
   }
 
   return (
