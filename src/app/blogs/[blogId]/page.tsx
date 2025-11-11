@@ -1,5 +1,3 @@
-import { SolarLikeBroken } from "@/components/icons";
-import { Button } from "@/components/ui/button";
 import { Post } from "@/types/Posts";
 import Image from "next/image";
 import Link from "next/link";
