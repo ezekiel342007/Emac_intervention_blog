@@ -2,7 +2,7 @@
 
 import SignUpForm from "@/components/function/register-form";
 import { useAuth } from "@/context/AuthContext";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 import { useState } from "react";
 
 
