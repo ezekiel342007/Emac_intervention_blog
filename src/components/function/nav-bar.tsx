@@ -8,17 +8,17 @@ import {
 } from "@/components/ui/navigation-menu"
 import { User } from "@/types/Posts";
 import { userDetails } from "@/lib/utils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function NavBar() {
+  const [username, setUsername] = useState(undefined);
 
-  let userName = "";
   let userData;
   useEffect(() => {
     userDetails().then((data: User) => { localStorage.setItem("currentUser", JSON.stringify(data)) });
     userData = localStorage.getItem("currentUser");
     if (userData)
-      userName = JSON.parse(userData).username;
+      setUsername(JSON.parse(userData).username);
   }, [userData]);
 
   return <div className="mb-36">
@@ -35,7 +35,7 @@ export default function NavBar() {
             <NavigationMenuLink>All Categories</NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuLink href={"/sign_in/"}>{(userName !== "") ? userName : "Sign in"}</NavigationMenuLink>
+            <NavigationMenuLink href={"/sign_in/"}>{username ? username : "Sign in"}</NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
