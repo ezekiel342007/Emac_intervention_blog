@@ -32,12 +32,6 @@ export default function NavBar() {
             <NavigationMenuLink href="/blogs/">Blogs</NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuLink>Tech</NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink>Career</NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
             <NavigationMenuLink>All Categories</NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
