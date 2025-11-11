@@ -46,9 +46,6 @@ export default function Page(): JSX.Element {
               />Write blog
             </Link>
           </div>
-          <ul className="flex space-x-4 relative left-0">
-            <li><Button variant={"outline"} onClick={() => setUrl(process.env.NEXT_PUBLIC_LATEST_POSTS_ENDPOINT as string)}>Latest</Button></li>
-          </ul>
         </div>
       </div>
       <div className="m-12 mt-42">
